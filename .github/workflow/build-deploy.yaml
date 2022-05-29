@@ -1,4 +1,4 @@
-name: Docker Build Deploy
+name: Docker Build & Deploy
 
 on:
   push:
@@ -26,3 +26,10 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/ctse-lab-10
+      - name: Run the image in a container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ secrets.DOCKER_USERNAME }}/ctse-lab-10
+          run: |
+            echo "runing the docker image"
+            echo "Testing the nodejs  app endpoints"
